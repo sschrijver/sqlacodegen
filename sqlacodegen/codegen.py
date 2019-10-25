@@ -599,8 +599,8 @@ class CodeGenerator(object):
         return rendered + delimiter.join(args) + end
 
     def render_table(self, model):
-        rendered = 't_{0} = Table(\n{1}{0!r}, metadata,\n'.format(
-            model.table.name, self.indentation)
+        rendered = 't_{0} = Table(\n{1}{2!r}, metadata,\n'.format(
+            model.table.name.replace(' ','_'), self.indentation, model.table.name)
 
         for column in model.table.columns:
             rendered += '{0}{1},\n'.format(self.indentation, self.render_column(column, True))
